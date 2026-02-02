@@ -112,6 +112,7 @@ main {
     white-space: nowrap;
     border-right: .10em solid #FA8C8C; /* The cursor */
     box-sizing: border-box;
+    visibility: hidden; /* Start hidden */
 }
 
 .line-1 {
@@ -127,20 +128,22 @@ main {
 }
 
 @keyframes typing-erase-1 {
-    0%      { width: 0; }
-    29%     { width: 100%; } /* Type for 3.5s */
-    37.5%   { width: 100%; } /* Hold for 1s */
-    41.6%   { width: 0; }     /* Delete in 0.5s */
-    100%    { width: 0; }     /* Stay hidden */
+    0%      { width: 0; visibility: visible; }
+    29%     { width: 100%; visibility: visible; } /* Type for 3.5s */
+    37.5%   { width: 100%; visibility: visible; } /* Hold for 1s */
+    41.6%   { width: 0; visibility: visible; }     /* Delete in 0.5s */
+    41.7%   { width: 0; visibility: hidden; }      /* Stay hidden */
+    100%    { width: 0; visibility: hidden; }
 }
 
 @keyframes typing-erase-2 {
-    0%      { width: 0; }
-    50%     { width: 0; }     /* Start at 6s */
-    70.8%   { width: 100%; } /* Type for 2.5s */
-    87.5%   { width: 100%; } /* Hold for 2s */
-    91.6%   { width: 0; }     /* Delete in 0.5s */
-    100%    { width: 0; }
+    0%      { width: 0; visibility: hidden; }
+    50%     { width: 0; visibility: visible; }      /* Start at 6s */
+    70.8%   { width: 100%; visibility: visible; }  /* Type for 2.5s */
+    87.5%   { width: 100%; visibility: visible; }  /* Hold for 2s */
+    91.6%   { width: 0; visibility: visible; }      /* Delete in 0.5s */
+    91.7%   { width: 0; visibility: hidden; }      /* Stay hidden */
+    100%    { width: 0; visibility: hidden; }
 }
 
 @keyframes blink-caret {
