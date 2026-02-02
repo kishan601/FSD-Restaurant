@@ -95,27 +95,59 @@ main {
     margin-bottom: 5rem;
 }
 
-.hero-text h1 {
+.hero-text .typing-effect {
     font-size: clamp(2.5rem, 5vw + 1rem, 3.8rem);
     font-weight: 800;
     margin-bottom: 1.5rem;
+    position: relative;
+    height: 1.2em; /* Prevents layout jump */
+}
+
+.typing-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
     overflow: hidden;
     white-space: nowrap;
-    border-right: .15em solid #FA8C8C;
-    animation: typing 3.5s steps(35, end), blink-caret .75s step-end infinite;
+    border-right: .10em solid #FA8C8C; /* The cursor */
+    box-sizing: border-box;
 }
 
-/* The typing effect */
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+.line-1 {
+    animation: 
+        typing-erase-1 12s infinite ease-in-out,
+        blink-caret .75s infinite;
 }
 
-/* The typewriter cursor effect */
+.line-2 {
+    animation: 
+        typing-erase-2 12s infinite ease-in-out,
+        blink-caret .75s infinite;
+}
+
+@keyframes typing-erase-1 {
+    0%      { width: 0; }
+    29%     { width: 100%; } /* Type for 3.5s */
+    37.5%   { width: 100%; } /* Hold for 1s */
+    41.6%   { width: 0; }     /* Delete in 0.5s */
+    100%    { width: 0; }     /* Stay hidden */
+}
+
+@keyframes typing-erase-2 {
+    0%      { width: 0; }
+    50%     { width: 0; }     /* Start at 6s */
+    70.8%   { width: 100%; } /* Type for 2.5s */
+    87.5%   { width: 100%; } /* Hold for 2s */
+    91.6%   { width: 0; }     /* Delete in 0.5s */
+    100%    { width: 0; }
+}
+
 @keyframes blink-caret {
     from, to { border-color: transparent }
     50% { border-color: #FA8C8C; }
 }
+
 
 .hero-text p {
     line-height: 1.7;
