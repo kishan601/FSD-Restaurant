@@ -1,0 +1,14 @@
+{
+    "name": "restaurant-website",
+    "version": "1.0.0",
+    "description": "A website for a restaurant",
+    "main": "bundle.js",
+    "scripts": {
+        "build": "tsc"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "typescript": "^5.0.0"
+    }
+}

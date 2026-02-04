@@ -1,11 +1,16 @@
 import { renderOrderPage } from './order.js';
+
 const mainContent = document.querySelector('main');
-const routes = {
+
+type RouteHandler = (container: HTMLElement) => void;
+
+const routes: { [path: string]: RouteHandler } = {
     '/': renderHomePage,
     '/order': renderOrderPage
 };
-function renderHomePage(container) {
-    if (container) {
+
+function renderHomePage(container: HTMLElement) {
+    if(container){
         container.innerHTML = `
         <section class="hero">
             <div class="hero-text">
@@ -95,9 +100,10 @@ function renderHomePage(container) {
             </div>
         </section>
     `;
-        initializeTypingEffect();
+    initializeTypingEffect();
     }
 }
+
 function initializeTypingEffect() {
     const typingElement = document.querySelector('.typing-effect');
     if (typingElement) {
@@ -108,40 +114,47 @@ function initializeTypingEffect() {
         let lineIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
+
         const type = () => {
             const currentLine = lines[lineIndex];
             const lineLength = currentLine.length;
             const typeSpeed = 1000 / lineLength;
             const deleteSpeed = 1000 / lineLength;
             let delay = isDeleting ? deleteSpeed : typeSpeed;
+
             if (isDeleting) {
                 charIndex--;
-                typingElement.textContent = currentLine.substring(0, charIndex);
-            }
-            else {
+                typingElement!.textContent = currentLine.substring(0, charIndex);
+            } else {
                 charIndex++;
-                typingElement.textContent = currentLine.substring(0, charIndex);
+                typingElement!.textContent = currentLine.substring(0, charIndex);
             }
+
             if (!isDeleting && charIndex === lineLength) {
-                delay = 1000;
+                delay = 1000; 
                 isDeleting = true;
-            }
-            else if (isDeleting && charIndex === 0) {
+            } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 lineIndex = (lineIndex + 1) % lines.length;
                 delay = 0;
             }
+
             setTimeout(type, delay);
-        };
+        }
         type();
     }
 }
-function router() {
+
+function router(){
     const path = window.location.hash.slice(1) || '/';
     const route = routes[path];
-    if (route && mainContent) {
+
+    if(route && mainContent){
         route(mainContent);
     }
 }
+
+
 window.addEventListener('hashchange', router);
+
 router();
